@@ -192,11 +192,12 @@ Rexie Maris is a specialized bag manufacturing company that produces high-qualit
 - **v2.0** (2025) - Complete system redesign with modern UI/UX
 - **v1.0** (2023) - Original production management system
 
-## License
+<!-- ## License
 
-This production management system is proprietary software developed specifically for Rexie Maris Bag Manufacturing Company.
+This production management system is proprietary software developed specifically for Rexie Maris Bag Manufacturing Company. -->
 
 ## Contact Information
+📧 **Charlize Amorato** - charlizeamorato.works@gmail.com
 
 For technical support or system modifications, please contact the development team or system administrator.
 
