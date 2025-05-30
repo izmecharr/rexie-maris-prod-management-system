@@ -1,0 +1,149 @@
+/* Main Page Specific Styles */
+
+#content-area {
+    min-height: 400px;
+    position: relative;
+}
+
+/* Page Transition Effects */
+.page-transition {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.page-transition.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Welcome Screen */
+.welcome-screen {
+    text-align: center;
+    padding: 60px 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.welcome-icon {
+    font-size: 64px;
+    margin-bottom: 24px;
+}
+
+.welcome-screen h2 {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #2d3748;
+}
+
+.welcome-screen p {
+    color: #718096;
+    font-size: 16px;
+    margin-bottom: 32px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.quick-start-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.quick-start-btn {
+    background: white;
+    border: 2px solid #667eea;
+    color: #667eea;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+}
+
+.quick-start-btn:hover {
+    background: #667eea;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Navigation Highlight */
+.nav-item.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* Content Loading States */
+.content-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Error States */
+.error-message {
+    background: #fed7d7;
+    color: #742a2a;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.error-message h3 {
+    margin-bottom: 8px;
+}
+
+/* Success Messages */
+.success-message {
+    background: #c6f6d5;
+    color: #22543d;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    margin: 20px 0;
+}
+
+/* System Status Indicator */
+.system-status {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: white;
+    padding: 12px 16px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    z-index: 1000;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.status-online { background: #38a169; }
+.status-offline { background: #e53e3e; }
+.status-loading { 
+    background: #ed8936;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
