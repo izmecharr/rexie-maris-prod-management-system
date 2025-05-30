@@ -12,66 +12,198 @@ let systemStatus = 'online';
 // Page configurations
 const pageConfig = {
     dashboard: {
-        title: 'Production Dashboard',
+        title: '📊 Production Dashboard',
         subtitle: 'Manage and track your bag production enterprise',
         file: 'pages/dashboard.html'
     },
     inventory: {
-        title: 'Inventory Management',
+        title: '📦 Inventory Management',
         subtitle: 'Track and manage raw materials and stock levels',
         file: 'pages/inventory.html'
     },
     production: {
-        title: 'Production Orders',
+        title: '🏭 Production Orders',
         subtitle: 'Manage production schedules and order tracking',
         file: 'pages/production.html'
     },
     catalog: {
-        title: 'Bag Catalog',
+        title: '🛍️ Bag Catalog',
         subtitle: 'Manage product catalog and specifications',
         file: 'pages/catalog.html'
     },
     clients: {
-        title: 'Client Management',
+        title: '👥 Client Management',
         subtitle: 'Manage client relationships and contact information',
         file: 'pages/clients.html'
     },
     sales: {
-        title: 'Sales & Orders',
+        title: '💰 Sales & Orders',
         subtitle: 'Track sales performance and order management',
         file: 'pages/sales.html'
     },
     analytics: {
-        title: 'Analytics & Reports',
+        title: '📈 Analytics & Reports',
         subtitle: 'Business intelligence and performance reports',
         file: 'pages/analytics.html'
     },
     delivery: {
-        title: 'Delivery Management',
+        title: '🚚 Delivery Management',
         subtitle: 'Track shipments and delivery performance',
         file: 'pages/delivery.html'
     },
     financial: {
-        title: 'Financial Overview',
+        title: '💳 Financial Overview',
         subtitle: 'Monitor financial performance and profitability',
         file: 'pages/financial.html'
     },
+    'equipment-status': {
+        title: '🔧 Equipment Status',
+        subtitle: 'Manage equipment and maintenance schedules',
+        file: 'pages/equipment-status.html'
+    },
     settings: {
-        title: 'System Settings',
+        title: '⚙️ System Settings',
         subtitle: 'Configure system preferences and options',
         file: 'pages/settings.html'
     },
     users: {
-        title: 'User Management',
+        title: '👤 User Management',
         subtitle: 'Manage user accounts and permissions',
         file: 'pages/users.html'
     },
-    email: {
-        title: 'Email Management',
-        subtitle: 'Manage communications and notifications',
-        file: 'pages/email.html'
-    }
 };
+
+// Enhanced content generation functions for other pages
+function generateDashboardContent() {
+    return `
+        <div class="dashboard-grid">
+            <div class="dashboard-card">
+                <h3>Dashboard</h3>
+                <p>Dashboard coming soon...</p>
+            </div>
+        </div>
+    `;
+}
+function generateInventoryContent() {
+    return `
+        <div class="dashboard-grid">
+            <div class="dashboard-card">
+                <h3>Raw Materials Overview</h3>
+                <p>Detailed inventory tracking system coming soon...</p>
+            </div>
+        </div>
+    `;
+}
+
+function generateProductionContent() {
+    return `
+        <div class="dashboard-grid">
+            <div class="dashboard-card">
+                <h3>Production Schedule</h3>
+                <p>Production order management system coming soon...</p>
+            </div>
+        </div>
+    `;
+}
+
+function generateCatalogContent() {
+    return `
+        <div class="dashboard-grid">
+            <div class="dashboard-card">
+                <h3>Product Catalog</h3>
+                <p>Product management system coming soon...</p>
+            </div>
+        </div>
+    `;
+}
+
+function generateClientsContent() {
+    return `
+        <div class="dashboard-grid">
+            <div class="dashboard-card">
+                <h3>Client Database</h3>
+                <p>Client management system coming soon...</p>
+            </div>
+        </div>
+    `;
+}
+
+function generateSalesContent() {
+    return `
+        <div class="dashboard-grid">
+            <div class="dashboard-card">
+                <h3>Sales Overview</h3>
+                <p>Sales management system coming soon...</p>
+            </div>
+        </div>
+    `;
+}
+
+function generateAnalyticsContent() {
+    return `
+        <div class="dashboard-grid">
+            <div class="dashboard-card">
+                <h3>Analytics Dashboard</h3>
+                <p>Analytics system coming soon...</p>
+            </div>
+        </div>
+    `;
+}
+
+function generateDeliveryContent() {
+    return `
+        <div class="dashboard-grid">
+            <div class="dashboard-card">
+                <h3>Delivery Tracking</h3>
+                <p>Delivery management system coming soon...</p>
+            </div>
+        </div>
+    `;
+}
+
+function generateFinancialContent() {
+    return `
+        <div class="dashboard-grid">
+            <div class="dashboard-card">
+                <h3>Financial Dashboard</h3>
+                <p>Financial management system coming soon...</p>
+            </div>
+        </div>
+    `;
+}
+
+function generateSettingsContent() {
+    return `
+        <div class="dashboard-grid">
+            <div class="dashboard-card">
+                <h3>System Configuration</h3>
+                <p>Settings management coming soon...</p>
+            </div>
+        </div>
+    `;
+}
+
+function generateUsersContent() {
+    return `
+        <div class="dashboard-grid">
+            <div class="dashboard-card">
+                <h3>User Administration</h3>
+                <p>User management system coming soon...</p>
+            </div>
+        </div>
+    `;
+}
+
+function generateEquipmentStatusContent() {
+    return `
+        <div class="dashboard-grid">
+            <div class="dashboard-card">
+                <h3>Equipment Status</h3>
+                <p>Equipment Status coming soon...</p>
+            </div>
+        </div>
+    `;
+}
 
 // Utility Functions
 function showLoading() {
@@ -205,8 +337,8 @@ function generatePageContent(page) {
             return generateSettingsContent();
         case 'users':
             return generateUsersContent();
-        case 'email':
-            return generateEmailContent();
+        case 'equipment-status':
+            return generateEquipmentStatusContent();
         default:
             return '<div class="error-message"><h3>Page not implemented yet</h3></div>';
     }
