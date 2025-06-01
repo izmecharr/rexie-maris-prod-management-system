@@ -143,15 +143,28 @@ async function generateInventoryContent() {
 //         </div>
 //     `;
 // }
-function generateProductionContent() {
-    return `
-        <div class="dashboard-grid">
-            <div class="dashboard-card">
-                <h3>Production Schedule</h3>
-                <p>Production order management system coming soon...</p>
+async function generateProductionContent() {
+    try {
+        // Load the production HTML content
+        const response = await fetch('pages/production.html');
+        if (!response.ok) {
+            throw new Error('Failed to load production page');
+        }
+        const htmlContent = await response.text();
+        return htmlContent;
+    } catch (error) {
+        console.error('Error loading production content:', error);
+        // Fallback content if file loading fails
+        return `
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <h3>Production Orders</h3>
+                    <p>Unable to load production system. Please check if the production.html file exists in the pages/ folder.</p>
+                    <button onclick="location.reload()" class="btn btn-primary">Retry Loading</button>
+                </div>
             </div>
-        </div>
-    `;
+        `;
+    }
 }
 
 function generateCatalogContent() {
@@ -368,7 +381,7 @@ async function generatePageContent(page) {
         case 'inventory':
             return await generateInventoryContent();
         case 'production':
-            return generateProductionContent();
+            return await generateProductionContent();
         case 'catalog':
             return generateCatalogContent();
         case 'clients':

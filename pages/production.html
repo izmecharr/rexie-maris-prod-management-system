@@ -1,0 +1,397 @@
+<!-- Production Orders Page Content -->
+<link rel="stylesheet" href="../assets/css/pages/production.css">
+
+<!-- Production Summary Cards -->
+<div class="production-summary">
+    <div class="summary-card total-orders">
+        <div class="summary-icon">📋</div>
+        <div class="summary-content">
+            <div class="summary-value" id="total-orders">127</div>
+            <div class="summary-label">Total Orders</div>
+            <div class="summary-change positive">+8 this week</div>
+        </div>
+    </div>
+    
+    <div class="summary-card active-orders">
+        <div class="summary-icon">⚡</div>
+        <div class="summary-content">
+            <div class="summary-value" id="active-orders">43</div>
+            <div class="summary-label">Active Orders</div>
+            <div class="summary-change neutral">2 urgent</div>
+        </div>
+    </div>
+    
+    <div class="summary-card completed-orders">
+        <div class="summary-icon">✅</div>
+        <div class="summary-content">
+            <div class="summary-value" id="completed-orders">84</div>
+            <div class="summary-label">Completed</div>
+            <div class="summary-change positive">+12 this month</div>
+        </div>
+    </div>
+    
+    <div class="summary-card capacity-utilization">
+        <div class="summary-icon">🏭</div>
+        <div class="summary-content">
+            <div class="summary-value" id="capacity-utilization">78%</div>
+            <div class="summary-label">Capacity Used</div>
+            <div class="summary-change positive">Optimal range</div>
+        </div>
+    </div>
+</div>
+
+<!-- Action Bar -->
+<div class="action-bar">
+    <div class="action-left">
+        <button class="btn btn-primary" onclick="Production.showNewOrderModal()">
+            <span>➕</span> New Production Order
+        </button>
+        <button class="btn btn-secondary" onclick="Production.showBulkActions()">
+            <span>📦</span> Bulk Actions
+        </button>
+        <button class="btn btn-secondary" onclick="Production.showScheduleView()">
+            <span>📅</span> Schedule View
+        </button>
+    </div>
+    
+    <div class="action-right">
+        <div class="search-box">
+            <input type="text" id="order-search" placeholder="Search orders..." class="search-input">
+            <button class="search-btn" onclick="Production.searchOrders()">🔍</button>
+        </div>
+        
+        <div class="filter-dropdown">
+            <select id="status-filter" class="filter-select" onchange="Production.filterByStatus()">
+                <option value="">All Status</option>
+                <option value="pending">Pending</option>
+                <option value="in-progress">In Progress</option>
+                <option value="quality-check">Quality Check</option>
+                <option value="completed">Completed</option>
+                <option value="on-hold">On Hold</option>
+                <option value="urgent">Urgent</option>
+            </select>
+        </div>
+        
+        <button class="btn btn-secondary" onclick="Production.exportOrders()">
+            <span>📊</span> Export
+        </button>
+    </div>
+</div>
+
+<!-- Production Timeline -->
+<div class="production-timeline">
+    <div class="timeline-header">
+        <h3>Production Timeline - June 2025</h3>
+        <div class="timeline-controls">
+            <button class="btn btn-sm btn-secondary" onclick="Production.previousMonth()">← May</button>
+            <button class="btn btn-sm btn-primary" onclick="Production.showCalendarView()">Calendar View</button>
+            <button class="btn btn-sm btn-secondary" onclick="Production.nextMonth()">July →</button>
+        </div>
+    </div>
+    
+    <div class="timeline-container">
+        <div class="timeline-item urgent">
+            <div class="timeline-date">Jun 1-3</div>
+            <div class="timeline-content">
+                <div class="order-header">
+                    <strong>Order #PO-2025-156</strong>
+                    <span class="priority-badge urgent">URGENT</span>
+                </div>
+                <div class="order-details">
+                    <p>50 Executive Briefcases for Fashion Gallery</p>
+                    <div class="order-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill urgent" style="width: 85%;"></div>
+                        </div>
+                        <span class="progress-text">85% Complete</span>
+                    </div>
+                </div>
+                <div class="order-actions">
+                    <button class="btn btn-sm btn-primary" onclick="Production.viewOrderDetails('PO-2025-156')">View Details</button>
+                    <button class="btn btn-sm btn-secondary" onclick="Production.updateProgress('PO-2025-156')">Update</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="timeline-item medium">
+            <div class="timeline-date">Jun 2-5</div>
+            <div class="timeline-content">
+                <div class="order-header">
+                    <strong>Order #PO-2025-157</strong>
+                    <span class="priority-badge medium">HIGH</span>
+                </div>
+                <div class="order-details">
+                    <p>75 Classic Totes for Metro Boutique</p>
+                    <div class="order-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill medium" style="width: 60%;"></div>
+                        </div>
+                        <span class="progress-text">60% Complete</span>
+                    </div>
+                </div>
+                <div class="order-actions">
+                    <button class="btn btn-sm btn-primary" onclick="Production.viewOrderDetails('PO-2025-157')">View Details</button>
+                    <button class="btn btn-sm btn-secondary" onclick="Production.updateProgress('PO-2025-157')">Update</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="timeline-item normal">
+            <div class="timeline-date">Jun 5-8</div>
+            <div class="timeline-content">
+                <div class="order-header">
+                    <strong>Order #PO-2025-158</strong>
+                    <span class="priority-badge normal">NORMAL</span>
+                </div>
+                <div class="order-details">
+                    <p>100 Casual Backpacks for Elite Accessories</p>
+                    <div class="order-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill normal" style="width: 25%;"></div>
+                        </div>
+                        <span class="progress-text">25% Complete</span>
+                    </div>
+                </div>
+                <div class="order-actions">
+                    <button class="btn btn-sm btn-primary" onclick="Production.viewOrderDetails('PO-2025-158')">View Details</button>
+                    <button class="btn btn-sm btn-secondary" onclick="Production.updateProgress('PO-2025-158')">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Production Orders Table -->
+<div class="production-table-container">
+    <div class="table-header">
+        <h3>All Production Orders</h3>
+        <div class="table-controls">
+            <span class="results-count" id="results-count">Showing 12 of 127 orders</span>
+            <div class="view-toggle">
+                <button class="view-btn active" onclick="Production.switchView('table')" data-view="table">📋</button>
+                <button class="view-btn" onclick="Production.switchView('cards')" data-view="cards">📱</button>
+                <button class="view-btn" onclick="Production.switchView('kanban')" data-view="kanban">📊</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="table-container" id="orders-table-view">
+        <table class="production-table">
+            <thead>
+                <tr>
+                    <th><input type="checkbox" id="select-all" onchange="Production.toggleSelectAll()"></th>
+                    <th onclick="Production.sortBy('orderNumber')">Order Number ↕</th>
+                    <th onclick="Production.sortBy('client')">Client ↕</th>
+                    <th onclick="Production.sortBy('product')">Product ↕</th>
+                    <th onclick="Production.sortBy('quantity')">Quantity ↕</th>
+                    <th onclick="Production.sortBy('status')">Status ↕</th>
+                    <th onclick="Production.sortBy('progress')">Progress ↕</th>
+                    <th onclick="Production.sortBy('dueDate')">Due Date ↕</th>
+                    <th onclick="Production.sortBy('assignedTo')">Assigned To ↕</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="orders-table-body">
+                <tr data-order-id="PO-2025-156" class="order-row urgent">
+                    <td><input type="checkbox" class="row-select" value="PO-2025-156"></td>
+                    <td class="order-number">
+                        <span class="order-id">PO-2025-156</span>
+                        <span class="order-priority urgent">🔥</span>
+                    </td>
+                    <td class="client-cell">
+                        <div class="client-info">
+                            <strong>Fashion Gallery</strong>
+                            <span class="client-tier premium">Premium</span>
+                        </div>
+                    </td>
+                    <td class="product-cell">
+                        <div class="product-info">
+                            <span class="product-name">Executive Briefcase</span>
+                            <span class="product-code">EB-001</span>
+                        </div>
+                    </td>
+                    <td class="quantity-cell">
+                        <span class="quantity">50</span>
+                        <span class="unit">units</span>
+                    </td>
+                    <td class="status-cell">
+                        <span class="status-badge in-progress">In Progress</span>
+                    </td>
+                    <td class="progress-cell">
+                        <div class="progress-container">
+                            <div class="progress-bar">
+                                <div class="progress-fill urgent" style="width: 85%;"></div>
+                            </div>
+                            <span class="progress-percentage">85%</span>
+                        </div>
+                    </td>
+                    <td class="due-date-cell">
+                        <span class="due-date urgent">May 31, 2025</span>
+                        <span class="days-remaining">Overdue</span>
+                    </td>
+                    <td class="assigned-cell">
+                        <div class="assignee">
+                            <div class="assignee-avatar">MS</div>
+                            <span class="assignee-name">Maria Santos</span>
+                        </div>
+                    </td>
+                    <td class="actions-cell">
+                        <button class="action-btn view" onclick="Production.viewOrderDetails('PO-2025-156')" title="View Details">👁</button>
+                        <button class="action-btn edit" onclick="Production.editOrder('PO-2025-156')" title="Edit Order">✏️</button>
+                        <button class="action-btn menu" onclick="Production.showOrderMenu('PO-2025-156')" title="More Actions">⋮</button>
+                    </td>
+                </tr>
+                
+                <tr data-order-id="PO-2025-157" class="order-row medium">
+                    <td><input type="checkbox" class="row-select" value="PO-2025-157"></td>
+                    <td class="order-number">
+                        <span class="order-id">PO-2025-157</span>
+                        <span class="order-priority medium">⚠️</span>
+                    </td>
+                    <td class="client-cell">
+                        <div class="client-info">
+                            <strong>Metro Boutique</strong>
+                            <span class="client-tier standard">Standard</span>
+                        </div>
+                    </td>
+                    <td class="product-cell">
+                        <div class="product-info">
+                            <span class="product-name">Classic Tote</span>
+                            <span class="product-code">CT-001</span>
+                        </div>
+                    </td>
+                    <td class="quantity-cell">
+                        <span class="quantity">75</span>
+                        <span class="unit">units</span>
+                    </td>
+                    <td class="status-cell">
+                        <span class="status-badge in-progress">In Progress</span>
+                    </td>
+                    <td class="progress-cell">
+                        <div class="progress-container">
+                            <div class="progress-bar">
+                                <div class="progress-fill medium" style="width: 60%;"></div>
+                            </div>
+                            <span class="progress-percentage">60%</span>
+                        </div>
+                    </td>
+                    <td class="due-date-cell">
+                        <span class="due-date">June 2, 2025</span>
+                        <span class="days-remaining">1 day left</span>
+                    </td>
+                    <td class="assigned-cell">
+                        <div class="assignee">
+                            <div class="assignee-avatar">JD</div>
+                            <span class="assignee-name">Juan Dela Cruz</span>
+                        </div>
+                    </td>
+                    <td class="actions-cell">
+                        <button class="action-btn view" onclick="Production.viewOrderDetails('PO-2025-157')" title="View Details">👁</button>
+                        <button class="action-btn edit" onclick="Production.editOrder('PO-2025-157')" title="Edit Order">✏️</button>
+                        <button class="action-btn menu" onclick="Production.showOrderMenu('PO-2025-157')" title="More Actions">⋮</button>
+                    </td>
+                </tr>
+                
+                <tr data-order-id="PO-2025-158" class="order-row normal">
+                    <td><input type="checkbox" class="row-select" value="PO-2025-158"></td>
+                    <td class="order-number">
+                        <span class="order-id">PO-2025-158</span>
+                        <span class="order-priority normal">📋</span>
+                    </td>
+                    <td class="client-cell">
+                        <div class="client-info">
+                            <strong>Elite Accessories</strong>
+                            <span class="client-tier premium">Premium</span>
+                        </div>
+                    </td>
+                    <td class="product-cell">
+                        <div class="product-info">
+                            <span class="product-name">Casual Backpack</span>
+                            <span class="product-code">CB-001</span>
+                        </div>
+                    </td>
+                    <td class="quantity-cell">
+                        <span class="quantity">100</span>
+                        <span class="unit">units</span>
+                    </td>
+                    <td class="status-cell">
+                        <span class="status-badge pending">Pending</span>
+                    </td>
+                    <td class="progress-cell">
+                        <div class="progress-container">
+                            <div class="progress-bar">
+                                <div class="progress-fill normal" style="width: 25%;"></div>
+                            </div>
+                            <span class="progress-percentage">25%</span>
+                        </div>
+                    </td>
+                    <td class="due-date-cell">
+                        <span class="due-date">June 5, 2025</span>
+                        <span class="days-remaining">4 days left</span>
+                    </td>
+                    <td class="assigned-cell">
+                        <div class="assignee">
+                            <div class="assignee-avatar">AR</div>
+                            <span class="assignee-name">Ana Rodriguez</span>
+                        </div>
+                    </td>
+                    <td class="actions-cell">
+                        <button class="action-btn view" onclick="Production.viewOrderDetails('PO-2025-158')" title="View Details">👁</button>
+                        <button class="action-btn edit" onclick="Production.editOrder('PO-2025-158')" title="Edit Order">✏️</button>
+                        <button class="action-btn menu" onclick="Production.showOrderMenu('PO-2025-158')" title="More Actions">⋮</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- Pagination -->
+    <div class="pagination">
+        <button class="page-btn" onclick="Production.previousPage()">← Previous</button>
+        <div class="page-numbers">
+            <button class="page-number active">1</button>
+            <button class="page-number">2</button>
+            <button class="page-number">3</button>
+            <span class="page-ellipsis">...</span>
+            <button class="page-number">11</button>
+        </div>
+        <button class="page-btn" onclick="Production.nextPage()">Next →</button>
+    </div>
+</div>
+
+<!-- Capacity Planning Widget -->
+<div class="capacity-planning">
+    <div class="capacity-header">
+        <h3>Production Capacity Planning</h3>
+        <button class="btn btn-secondary" onclick="Production.showCapacityDetails()">Optimize Schedule</button>
+    </div>
+    
+    <div class="capacity-metrics">
+        <div class="capacity-item">
+            <span class="capacity-label">Current Utilization:</span>
+            <div class="capacity-bar">
+                <div class="capacity-fill" style="width: 78%;">78%</div>
+            </div>
+            <span class="capacity-status optimal">Optimal</span>
+        </div>
+        
+        <div class="capacity-item">
+            <span class="capacity-label">Available Capacity:</span>
+            <div class="capacity-info">
+                <strong>110 units/week</strong>
+                <span class="capacity-note">(22% remaining)</span>
+            </div>
+        </div>
+        
+        <div class="capacity-item">
+            <span class="capacity-label">Peak Hours:</span>
+            <div class="capacity-info">
+                <strong>9:00 AM - 3:00 PM</strong>
+                <span class="capacity-note">Maximum efficiency</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Load Production JavaScript -->
+<script src="../assets/js/pages/production.js"></script>
