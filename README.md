@@ -21,14 +21,14 @@ Rexie Maris is a specialized bag manufacturing company that produces high-qualit
 - ✅ Quick action buttons for common tasks
 
 ### 📦 Inventory Management Module
-  ✅ Raw materials tracking (Leather, Fabric, Hardware, Packaging)
-  ✅ Low stock alerts and notifications
-  ✅ Inventory level progress bars with color coding
-  ✅ Automatic reorder point calculations
-  ✅ Supplier management integration
-  ✅ Stock movement history
-  ✅ Material cost tracking
-  ✅ Inventory valuation reports
+- ✅ Raw materials tracking (Leather, Fabric, Hardware, Packaging)
+- ✅ Low stock alerts and notifications
+- ✅ Inventory level progress bars with color coding
+- ✅ Automatic reorder point calculations
+- ✅ Supplier management integration
+- ✅ Stock movement history
+- ✅ Material cost tracking
+- ✅ Inventory valuation reports
 
 ### 🏭 Production Orders Module
 - [ ] New production order creation
