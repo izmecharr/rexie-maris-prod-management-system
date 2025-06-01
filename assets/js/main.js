@@ -42,6 +42,43 @@ function setupNavigation() {
 }
 
 // Main page loading function
+async function loadPageContent(page) {
+    const config = pageConfig[page];
+    if (!config) {
+        showError('Page not found');
+        return;
+    }
+    
+    try {
+        showLoading();
+        updatePageHeader(page);
+        setActiveNavItem(page);
+        
+        // Simulate loading delay
+        await new Promise(resolve => setTimeout(resolve, 500));
+        
+        // Load page-specific content - now properly handles async
+        const contentArea = document.getElementById('content-area');
+        const content = await generatePageContent(page); // Add await here
+        
+        contentArea.innerHTML = content;
+        
+        // Add transition effect
+        contentArea.classList.remove('active');
+        setTimeout(() => {
+            contentArea.classList.add('active');
+        }, 50);
+        
+        // Load page-specific JavaScript (if needed)
+        loadPageScript(page);
+        
+    } catch (error) {
+        showError('Failed to load page content');
+        console.error('Page loading error:', error);
+    }
+}
+
+// Update the main page loading function to be async
 async function loadPage(page) {
     if (isLoading) return;
     
@@ -52,7 +89,7 @@ async function loadPage(page) {
     updateNavigation(page);
     
     try {
-        // Load the page content
+        // Load the page content - now async
         await loadPageContent(page);
         
         // Update URL without page refresh (if using history API)

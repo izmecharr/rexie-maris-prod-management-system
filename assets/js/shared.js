@@ -84,17 +84,53 @@ function generateDashboardContent() {
         </div>
     `;
 }
-function generateInventoryContent() {
-    return `
-        <div class="dashboard-grid">
-            <div class="dashboard-card">
-                <h3>Raw Materials Overview</h3>
-                <p>Detailed inventory tracking system coming soon...</p>
+// function generateInventoryContent() {
+//     return `
+//         <div class="dashboard-grid">
+//             <div class="dashboard-card">
+//                 <h3>Raw Materials Overview</h3>
+//                 <p>Detailed inventory tracking system coming soon...</p>
+//             </div>
+//         </div>
+//     `;
+// }
+
+async function generateInventoryContent() {
+    try {
+        // Load the inventory HTML content (which includes CSS and JS links)
+        const response = await fetch('pages/inventory.html');
+        if (!response.ok) {
+            throw new Error('Failed to load inventory page');
+        }
+        const htmlContent = await response.text();
+        return htmlContent;
+    } catch (error) {
+        console.error('Error loading inventory content:', error);
+        // Fallback content if file loading fails
+        return `
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <h3>Inventory Management</h3>
+                    <p>Unable to load inventory system. Please check if the inventory.html file exists in the pages/ folder.</p>
+                    <button onclick="location.reload()" class="btn btn-primary">Retry Loading</button>
+                </div>
             </div>
-        </div>
-    `;
+        `;
+    }
 }
 
+// // Fallback content in case external files fail to load
+// function getInventoryFallbackContent() {
+//     return `
+//         <div class="dashboard-grid">
+//             <div class="dashboard-card">
+//                 <h3>Inventory Management</h3>
+//                 <p>Loading inventory system...</p>
+//                 <button onclick="location.reload()" class="btn btn-primary">Retry Loading</button>
+//             </div>
+//         </div>
+//     `;
+// }
 function generateProductionContent() {
     return `
         <div class="dashboard-grid">
@@ -313,12 +349,12 @@ async function loadPageContent(page) {
 }
 
 // Generate placeholder content for each page
-function generatePageContent(page) {
+async function generatePageContent(page) {
     switch(page) {
         case 'dashboard':
             return generateDashboardContent();
         case 'inventory':
-            return generateInventoryContent();
+            return await generateInventoryContent();
         case 'production':
             return generateProductionContent();
         case 'catalog':

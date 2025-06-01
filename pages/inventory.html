@@ -1,0 +1,433 @@
+<!-- Inventory Management Dashboard -->
+<!-- Link to Inventory-specific CSS -->
+<link rel="stylesheet" href="../assets/css/pages/inventory.css">
+
+<div class="inventory-dashboard">
+    <!-- Alert Banner for Low Stock -->
+    <div class="alert-banner" id="low-stock-alert">
+        <div class="alert-icon">⚠️</div>
+        <div>
+            <strong>Low Stock Alert:</strong> 2 materials are below reorder point. 
+            <a href="#" onclick="scrollToLowStock()">View details</a>
+        </div>
+    </div>
+
+    <!-- Quick Stats Overview -->
+    <div class="inventory-stats-grid">
+        <div class="stat-card critical">
+            <div class="stat-icon">🔴</div>
+            <div class="stat-info">
+                <div class="stat-value">2</div>
+                <div class="stat-label">Critical Stock</div>
+            </div>
+        </div>
+        <div class="stat-card warning">
+            <div class="stat-icon">🟡</div>
+            <div class="stat-info">
+                <div class="stat-value">3</div>
+                <div class="stat-label">Low Stock</div>
+            </div>
+        </div>
+        <div class="stat-card good">
+            <div class="stat-icon">🟢</div>
+            <div class="stat-info">
+                <div class="stat-value">8</div>
+                <div class="stat-label">Good Stock</div>
+            </div>
+        </div>
+        <div class="stat-card total-value">
+            <div class="stat-icon">💰</div>
+            <div class="stat-info">
+                <div class="stat-value">₱284,650</div>
+                <div class="stat-label">Total Inventory Value</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Grid -->
+    <div class="inventory-main-grid">
+        <!-- Raw Materials Tracking -->
+        <div class="dashboard-card inventory-materials">
+            <div class="card-header">
+                <h3 class="card-title">Raw Materials Overview</h3>
+                <div class="card-actions">
+                    <button class="btn btn-secondary" onclick="addNewMaterial()">+ Add Material</button>
+                    <button class="btn btn-primary" onclick="generateReorderReport()">📊 Reorder Report</button>
+                </div>
+            </div>
+            
+            <div class="materials-grid">
+                <div class="material-card leather critical">
+                    <div class="material-header">
+                        <div class="material-info">
+                            <h4>Premium Leather</h4>
+                            <span class="material-code">MAT-001</span>
+                        </div>
+                        <div class="material-status">
+                            <span class="status-badge status-critical">Critical</span>
+                        </div>
+                    </div>
+                    <div class="material-metrics">
+                        <div class="metric">
+                            <span class="metric-label">Current Stock</span>
+                            <span class="metric-value critical">15 sq.m</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Reorder Point</span>
+                            <span class="metric-value">25 sq.m</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Unit Cost</span>
+                            <span class="metric-value">₱850/sq.m</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Supplier</span>
+                            <span class="metric-value">Premium Leather Co.</span>
+                        </div>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill progress-critical" style="width: 25%"></div>
+                        </div>
+                        <div class="progress-text">25% of safety stock</div>
+                    </div>
+                    <div class="material-actions">
+                        <button class="btn btn-primary btn-sm" onclick="createPurchaseOrder('MAT-001')">Reorder Now</button>
+                        <button class="btn btn-secondary btn-sm" onclick="viewMaterialHistory('MAT-001')">History</button>
+                    </div>
+                </div>
+
+                <div class="material-card fabric warning">
+                    <div class="material-header">
+                        <div class="material-info">
+                            <h4>Canvas Fabric</h4>
+                            <span class="material-code">MAT-002</span>
+                        </div>
+                        <div class="material-status">
+                            <span class="status-badge status-warning">Low</span>
+                        </div>
+                    </div>
+                    <div class="material-metrics">
+                        <div class="metric">
+                            <span class="metric-label">Current Stock</span>
+                            <span class="metric-value warning">35 yards</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Reorder Point</span>
+                            <span class="metric-value">30 yards</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Unit Cost</span>
+                            <span class="metric-value">₱320/yard</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Supplier</span>
+                            <span class="metric-value">Textile Masters Inc.</span>
+                        </div>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill progress-warning" style="width: 58%"></div>
+                        </div>
+                        <div class="progress-text">58% of safety stock</div>
+                    </div>
+                    <div class="material-actions">
+                        <button class="btn btn-primary btn-sm" onclick="createPurchaseOrder('MAT-002')">Reorder</button>
+                        <button class="btn btn-secondary btn-sm" onclick="viewMaterialHistory('MAT-002')">History</button>
+                    </div>
+                </div>
+
+                <div class="material-card hardware good">
+                    <div class="material-header">
+                        <div class="material-info">
+                            <h4>Metal Hardware</h4>
+                            <span class="material-code">MAT-003</span>
+                        </div>
+                        <div class="material-status">
+                            <span class="status-badge status-good">Good</span>
+                        </div>
+                    </div>
+                    <div class="material-metrics">
+                        <div class="metric">
+                            <span class="metric-label">Current Stock</span>
+                            <span class="metric-value good">178 pieces</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Reorder Point</span>
+                            <span class="metric-value">50 pieces</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Unit Cost</span>
+                            <span class="metric-value">₱45/piece</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Supplier</span>
+                            <span class="metric-value">Hardware Solutions</span>
+                        </div>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill progress-good" style="width: 100%"></div>
+                        </div>
+                        <div class="progress-text">Well stocked</div>
+                    </div>
+                    <div class="material-actions">
+                        <button class="btn btn-secondary btn-sm" onclick="viewMaterialHistory('MAT-003')">History</button>
+                        <button class="btn btn-secondary btn-sm" onclick="adjustStock('MAT-003')">Adjust</button>
+                    </div>
+                </div>
+
+                <div class="material-card packaging optimal">
+                    <div class="material-header">
+                        <div class="material-info">
+                            <h4>Gift Packaging</h4>
+                            <span class="material-code">MAT-004</span>
+                        </div>
+                        <div class="material-status">
+                            <span class="status-badge status-optimal">Optimal</span>
+                        </div>
+                    </div>
+                    <div class="material-metrics">
+                        <div class="metric">
+                            <span class="metric-label">Current Stock</span>
+                            <span class="metric-value optimal">92 boxes</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Reorder Point</span>
+                            <span class="metric-value">20 boxes</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Unit Cost</span>
+                            <span class="metric-value">₱25/box</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Supplier</span>
+                            <span class="metric-value">Package Pro Ltd.</span>
+                        </div>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill progress-optimal" style="width: 100%"></div>
+                        </div>
+                        <div class="progress-text">Well stocked</div>
+                    </div>
+                    <div class="material-actions">
+                        <button class="btn btn-secondary btn-sm" onclick="viewMaterialHistory('MAT-004')">History</button>
+                        <button class="btn btn-secondary btn-sm" onclick="adjustStock('MAT-004')">Adjust</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Sidebar -->
+        <div class="right-sidebar">
+            <!-- Supplier Management -->
+            <div class="dashboard-card supplier-management">
+                <div class="card-header">
+                    <h3 class="card-title">Supplier Overview</h3>
+                    <div class="card-actions">
+                        <button class="btn btn-secondary btn-sm" onclick="manageSuppliers()">Manage</button>
+                    </div>
+                </div>
+                
+                <div class="supplier-list">
+                    <div class="supplier-item">
+                        <div class="supplier-info">
+                            <h4>Premium Leather Co.</h4>
+                            <span class="supplier-category">Leather Supplier</span>
+                        </div>
+                        <div class="supplier-metrics">
+                            <span class="metric">Lead Time: 7 days</span>
+                            <span class="metric">Rating: ⭐⭐⭐⭐⭐</span>
+                        </div>
+                        <div class="supplier-status">
+                            <span class="status-badge status-good">Active</span>
+                        </div>
+                    </div>
+                    
+                    <div class="supplier-item">
+                        <div class="supplier-info">
+                            <h4>Textile Masters Inc.</h4>
+                            <span class="supplier-category">Fabric Supplier</span>
+                        </div>
+                        <div class="supplier-metrics">
+                            <span class="metric">Lead Time: 5 days</span>
+                            <span class="metric">Rating: ⭐⭐⭐⭐</span>
+                        </div>
+                        <div class="supplier-status">
+                            <span class="status-badge status-good">Active</span>
+                        </div>
+                    </div>
+                    
+                    <div class="supplier-item">
+                        <div class="supplier-info">
+                            <h4>Hardware Solutions</h4>
+                            <span class="supplier-category">Hardware Supplier</span>
+                        </div>
+                        <div class="supplier-metrics">
+                            <span class="metric">Lead Time: 3 days</span>
+                            <span class="metric">Rating: ⭐⭐⭐⭐⭐</span>
+                        </div>
+                        <div class="supplier-status">
+                            <span class="status-badge status-good">Active</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Inventory Valuation -->
+            <div class="dashboard-card inventory-valuation">
+                <div class="card-header">
+                    <h3 class="card-title">Inventory Valuation</h3>
+                    <div class="card-actions">
+                        <button class="btn btn-secondary btn-sm" onclick="generateValuationReport()">Report</button>
+                    </div>
+                </div>
+                
+                <div class="valuation-breakdown">
+                    <div class="valuation-item">
+                        <div class="valuation-category">Premium Leather</div>
+                        <div class="valuation-details">
+                            <span class="quantity">15 sq.m × ₱850</span>
+                            <span class="value">₱12,750</span>
+                        </div>
+                    </div>
+                    <div class="valuation-item">
+                        <div class="valuation-category">Canvas Fabric</div>
+                        <div class="valuation-details">
+                            <span class="quantity">35 yards × ₱320</span>
+                            <span class="value">₱11,200</span>
+                        </div>
+                    </div>
+                    <div class="valuation-item">
+                        <div class="valuation-category">Metal Hardware</div>
+                        <div class="valuation-details">
+                            <span class="quantity">178 pieces × ₱45</span>
+                            <span class="value">₱8,010</span>
+                        </div>
+                    </div>
+                    <div class="valuation-item">
+                        <div class="valuation-category">Gift Packaging</div>
+                        <div class="valuation-details">
+                            <span class="quantity">92 boxes × ₱25</span>
+                            <span class="value">₱2,300</span>
+                        </div>
+                    </div>
+                    <div class="valuation-total">
+                        <div class="valuation-category"><strong>Total Inventory Value</strong></div>
+                        <div class="valuation-details">
+                            <span class="value total"><strong>₱34,260</strong></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Stock Movements -->
+    <div class="dashboard-card stock-movements">
+        <div class="card-header">
+            <h3 class="card-title">Recent Stock Movements</h3>
+            <div class="card-actions">
+                <button class="btn btn-secondary" onclick="exportMovements()">Export CSV</button>
+            </div>
+        </div>
+        
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Material</th>
+                        <th>Type</th>
+                        <th>Quantity</th>
+                        <th>Reference</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>May 30, 2025</td>
+                        <td>Premium Leather</td>
+                        <td><span class="movement-type outbound">OUT</span></td>
+                        <td>-12 sq.m</td>
+                        <td>PO-2025-089</td>
+                        <td><span class="status-badge status-completed">Completed</span></td>
+                    </tr>
+                    <tr>
+                        <td>May 29, 2025</td>
+                        <td>Canvas Fabric</td>
+                        <td><span class="movement-type inbound">IN</span></td>
+                        <td>+50 yards</td>
+                        <td>REC-2025-156</td>
+                        <td><span class="status-badge status-completed">Completed</span></td>
+                    </tr>
+                    <tr>
+                        <td>May 28, 2025</td>
+                        <td>Metal Hardware</td>
+                        <td><span class="movement-type outbound">OUT</span></td>
+                        <td>-25 pieces</td>
+                        <td>PO-2025-087</td>
+                        <td><span class="status-badge status-completed">Completed</span></td>
+                    </tr>
+                    <tr>
+                        <td>May 27, 2025</td>
+                        <td>Gift Packaging</td>
+                        <td><span class="movement-type adjustment">ADJ</span></td>
+                        <td>+5 boxes</td>
+                        <td>ADJ-2025-023</td>
+                        <td><span class="status-badge status-completed">Completed</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Hidden Modal for Adding New Material -->
+<div id="add-material-modal" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Add New Material</h3>
+            <button class="modal-close" onclick="closeModal('add-material-modal')">&times;</button>
+        </div>
+        <form onsubmit="addMaterial(event)">
+            <div class="form-group">
+                <label for="material-name">Material Name</label>
+                <input type="text" id="material-name" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="material-code">Material Code</label>
+                <input type="text" id="material-code" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="unit-type">Unit Type</label>
+                <select id="unit-type" class="form-control" required>
+                    <option value="">Select unit...</option>
+                    <option value="sq.m">Square Meters</option>
+                    <option value="yards">Yards</option>
+                    <option value="pieces">Pieces</option>
+                    <option value="boxes">Boxes</option>
+                    <option value="kg">Kilograms</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="unit-cost">Unit Cost (₱)</label>
+                <input type="number" id="unit-cost" class="form-control" step="0.01" required>
+            </div>
+            <div class="form-group">
+                <label for="reorder-point">Reorder Point</label>
+                <input type="number" id="reorder-point" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="current-stock">Current Stock</label>
+                <input type="number" id="current-stock" class="form-control" step="0.01" required>
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="btn btn-secondary" onclick="closeModal('add-material-modal')">Cancel</button>
+                <button type="submit" class="btn btn-primary">Add Material</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="assets/js/pages/inventory.js"></script>
