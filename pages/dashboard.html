@@ -1,0 +1,306 @@
+<!-- Dashboard Page Content -->
+<link rel="stylesheet" href="../assets/css/pages/dashboard.css">
+
+<!-- Alert Banner -->
+<div class="alert-banner">
+    <span class="alert-icon">⚠️</span>
+    <span>Critical inventory alert: Leather stock is running low. Immediate reorder recommended.</span>
+    <button class="btn btn-primary" style="margin-left: auto; padding: 4px 12px;" onclick="Dashboard.handleInventoryAlert()">Take Action</button>
+</div>
+
+<!-- Quick Actions -->
+<div class="quick-actions">
+    <div class="quick-action-btn" onclick="Dashboard.showNewProductionOrder()">
+        <span>➕</span> New Production Order
+    </div>
+    <div class="quick-action-btn" onclick="Dashboard.showInventoryDialog()">
+        <span>📋</span> Add Inventory
+    </div>
+    <div class="quick-action-btn" onclick="Dashboard.showNewClient()">
+        <span>👤</span> New Client
+    </div>
+    <div class="quick-action-btn" onclick="Dashboard.generateReport()">
+        <span>📊</span> Generate Report
+    </div>
+</div>
+
+<!-- Stats Overview -->
+<div class="stats-grid">
+    <div class="stat-card">
+        <div class="stat-value" id="monthly-revenue" style="color: #667eea;">₱247,385</div>
+        <div class="stat-label">Monthly Revenue</div>
+        <div class="stat-change positive">+12.5% from last month</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-value" id="bags-produced" style="color: #38a169;">1,234</div>
+        <div class="stat-label">Bags Produced</div>
+        <div class="stat-change positive">+8.2% this month</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-value" id="active-orders" style="color: #ed8936;">43</div>
+        <div class="stat-label">Active Orders</div>
+        <div class="stat-change negative">-3 from yesterday</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-value" id="delivery-rate" style="color: #38b2ac;">89%</div>
+        <div class="stat-label">On-Time Delivery</div>
+        <div class="stat-change positive">+2.1% improvement</div>
+    </div>
+</div>
+
+<!-- Dashboard Grid -->
+<div class="dashboard-grid">
+    <!-- Production Overview -->
+    <div class="dashboard-card">
+        <div class="card-header">
+            <h3 class="card-title">Production Overview</h3>
+            <div class="card-actions">
+                <button class="btn btn-secondary" onclick="Dashboard.exportData('production', 'csv')">Export CSV</button>
+                <button class="btn btn-primary" onclick="Dashboard.viewProductionDetails()">View Details</button>
+            </div>
+        </div>
+        <div class="chart-container">
+            <div class="chart-placeholder">📈 Production Trends Chart</div>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-top: 16px;">
+            <div>
+                <div style="color: #38a169; font-weight: 600;">Completed: 32</div>
+                <div style="color: #ed8936; font-weight: 600;">In Progress: 14</div>
+            </div>
+            <div>
+                <div style="color: #e53e3e; font-weight: 600;">Delayed: 3</div>
+                <div style="color: #718096; font-weight: 600;">Not Started: 8</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Inventory Status -->
+    <div class="dashboard-card">
+        <div class="card-header">
+            <h3 class="card-title">Raw Materials Inventory</h3>
+            <div class="card-actions">
+                <button class="btn btn-secondary" onclick="Dashboard.exportData('inventory', 'excel')">Export Excel</button>
+                <button class="btn btn-primary" onclick="Dashboard.reorderMaterials()">Reorder</button>
+            </div>
+        </div>
+        <div style="margin: 16px 0;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                <span>Leather Stock</span>
+                <span style="color: #e53e3e; font-weight: 600;">Critical: 15%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill progress-overdue" style="width: 15%;"></div>
+            </div>
+            
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                <span>Fabric Materials</span>
+                <span style="color: #ed8936; font-weight: 600;">Low: 35%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill progress-not-paid" style="width: 35%;"></div>
+            </div>
+            
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                <span>Hardware & Zippers</span>
+                <span style="color: #38a169; font-weight: 600;">Good: 78%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill progress-paid" style="width: 78%;"></div>
+            </div>
+            
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                <span>Packaging Materials</span>
+                <span style="color: #38b2ac; font-weight: 600;">Optimal: 92%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill progress-partial" style="width: 92%;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Top Selling Bags -->
+    <div class="dashboard-card">
+        <div class="card-header">
+            <h3 class="card-title">Most Popular Bag Models</h3>
+            <div class="card-actions">
+                <button class="btn btn-secondary" onclick="Dashboard.exportData('products', 'csv')">Export Data</button>
+                <button class="btn btn-primary" onclick="Dashboard.viewAllProducts()">View All</button>
+            </div>
+        </div>
+        <div class="table-container">
+            <table id="popular-bags-table">
+                <thead>
+                    <tr>
+                        <th>Bag Model</th>
+                        <th>Units Sold</th>
+                        <th>Revenue</th>
+                        <th>Trend</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Classic Tote</td>
+                        <td>156</td>
+                        <td>₱46,800</td>
+                        <td style="color: #38a169;">↗ +15%</td>
+                    </tr>
+                    <tr>
+                        <td>Executive Briefcase</td>
+                        <td>89</td>
+                        <td>₱62,300</td>
+                        <td style="color: #38a169;">↗ +8%</td>
+                    </tr>
+                    <tr>
+                        <td>Casual Backpack</td>
+                        <td>134</td>
+                        <td>₱40,200</td>
+                        <td style="color: #e53e3e;">↘ -3%</td>
+                    </tr>
+                    <tr>
+                        <td>Evening Clutch</td>
+                        <td>67</td>
+                        <td>₱20,100</td>
+                        <td style="color: #38a169;">↗ +22%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Current Orders -->
+    <div class="dashboard-card">
+        <div class="card-header">
+            <h3 class="card-title">Recent Orders & Deliveries</h3>
+            <div class="card-actions">
+                <button class="btn btn-secondary" onclick="Dashboard.printOrders()">Print</button>
+                <button class="btn btn-primary" onclick="Dashboard.manageOrders()">Manage</button>
+            </div>
+        </div>
+        <div class="table-container">
+            <table id="recent-orders-table">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Client</th>
+                        <th>Status</th>
+                        <th>Delivery</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>#ORD-001</td>
+                        <td>ABC Fashion Store</td>
+                        <td><span class="status-badge status-completed">Completed</span></td>
+                        <td>May 28, 2025</td>
+                    </tr>
+                    <tr>
+                        <td>#ORD-002</td>
+                        <td>Metro Boutique</td>
+                        <td><span class="status-badge status-in-progress">In Progress</span></td>
+                        <td>June 2, 2025</td>
+                    </tr>
+                    <tr>
+                        <td>#ORD-003</td>
+                        <td>Elite Accessories</td>
+                        <td><span class="status-badge status-pending">Pending</span></td>
+                        <td>June 5, 2025</td>
+                    </tr>
+                    <tr>
+                        <td>#ORD-004</td>
+                        <td>Fashion Gallery</td>
+                        <td><span class="status-badge status-urgent">Urgent</span></td>
+                        <td>May 31, 2025</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Top Clients -->
+    <div class="dashboard-card">
+        <div class="card-header">
+            <h3 class="card-title">Top Clients</h3>
+            <div class="card-actions">
+                <button class="btn btn-secondary" onclick="Dashboard.exportData('clients', 'csv')">Export</button>
+                <button class="btn btn-primary" onclick="Dashboard.contactClients()">Contact</button>
+            </div>
+        </div>
+        <div class="table-container">
+            <table id="top-clients-table">
+                <thead>
+                    <tr>
+                        <th>Client Name</th>
+                        <th>Total Orders</th>
+                        <th>Revenue</th>
+                        <th>Last Order</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>ABC Fashion Store</td>
+                        <td>23</td>
+                        <td>₱89,450</td>
+                        <td>May 28, 2025</td>
+                    </tr>
+                    <tr>
+                        <td>Metro Boutique</td>
+                        <td>18</td>
+                        <td>₱67,200</td>
+                        <td>May 25, 2025</td>
+                    </tr>
+                    <tr>
+                        <td>Elite Accessories</td>
+                        <td>15</td>
+                        <td>₱52,800</td>
+                        <td>May 20, 2025</td>
+                    </tr>
+                    <tr>
+                        <td>Fashion Gallery</td>
+                        <td>12</td>
+                        <td>₱43,600</td>
+                        <td>May 15, 2025</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Financial Overview -->
+    <div class="dashboard-card">
+        <div class="card-header">
+            <h3 class="card-title">Financial Overview</h3>
+            <div class="card-actions">
+                <button class="btn btn-secondary" onclick="Dashboard.exportData('financial', 'excel')">Export Report</button>
+                <button class="btn btn-primary" onclick="Dashboard.viewFinancialDetails()">Details</button>
+            </div>
+        </div>
+        <div style="margin: 16px 0;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
+                <div>
+                    <div style="color: #718096; font-size: 14px;">Total Revenue</div>
+                    <div style="font-size: 24px; font-weight: 600; color: #38a169;">₱247,385</div>
+                </div>
+                <div>
+                    <div style="color: #718096; font-size: 14px;">Total Expenses</div>
+                    <div style="font-size: 24px; font-weight: 600; color: #e53e3e;">₱156,720</div>
+                </div>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+                <div>
+                    <div style="color: #718096; font-size: 14px;">Net Profit</div>
+                    <div style="font-size: 20px; font-weight: 600; color: #667eea;">₱90,665</div>
+                </div>
+                <div>
+                    <div style="color: #718096; font-size: 14px;">Profit Margin</div>
+                    <div style="font-size: 20px; font-weight: 600; color: #38b2ac;">36.7%</div>
+                </div>
+            </div>
+        </div>
+        <div class="chart-container">
+            <div class="chart-placeholder">💰 Revenue vs Expenses Chart</div>
+        </div>
+    </div>
+</div>
+
+<!-- Load Dashboard JavaScript -->
+<script src="../assets/js/pages/dashboard.js"></script>

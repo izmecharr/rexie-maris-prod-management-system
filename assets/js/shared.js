@@ -73,16 +73,28 @@ const pageConfig = {
     },
 };
 
-// Enhanced content generation functions for other pages
-function generateDashboardContent() {
-    return `
-        <div class="dashboard-grid">
-            <div class="dashboard-card">
-                <h3>Dashboard</h3>
-                <p>Dashboard coming soon...</p>
+async function generateDashboardContent() {
+    try {
+        // Load the dashboard HTML content
+        const response = await fetch('pages/dashboard.html');
+        if (!response.ok) {
+            throw new Error('Failed to load dashboard page');
+        }
+        const htmlContent = await response.text();
+        return htmlContent;
+    } catch (error) {
+        console.error('Error loading dashboard content:', error);
+        // Fallback content if file loading fails
+        return `
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <h3>Production Dashboard</h3>
+                    <p>Unable to load dashboard system. Please check if the dashboard.html file exists in the pages/ folder.</p>
+                    <button onclick="location.reload()" class="btn btn-primary">Retry Loading</button>
+                </div>
             </div>
-        </div>
-    `;
+        `;
+    }
 }
 // function generateInventoryContent() {
 //     return `
@@ -352,7 +364,7 @@ async function loadPageContent(page) {
 async function generatePageContent(page) {
     switch(page) {
         case 'dashboard':
-            return generateDashboardContent();
+            return await generateDashboardContent();
         case 'inventory':
             return await generateInventoryContent();
         case 'production':
