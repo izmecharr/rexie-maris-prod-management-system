@@ -167,15 +167,28 @@ async function generateProductionContent() {
     }
 }
 
-function generateCatalogContent() {
-    return `
-        <div class="dashboard-grid">
-            <div class="dashboard-card">
-                <h3>Product Catalog</h3>
-                <p>Product management system coming soon...</p>
+async function generateCatalogContent() {
+    try {
+        // Load the catalog HTML content
+        const response = await fetch('pages/catalog.html');
+        if (!response.ok) {
+            throw new Error('Failed to load catalog page');
+        }
+        const htmlContent = await response.text();
+        return htmlContent;
+    } catch (error) {
+        console.error('Error loading catalog content:', error);
+        // Fallback content if file loading fails
+        return `
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <h3>Bag Catalog</h3>
+                    <p>Unable to load catalog system. Please check if the catalog.html file exists in the pages/ folder.</p>
+                    <button onclick="location.reload()" class="btn btn-primary">Retry Loading</button>
+                </div>
             </div>
-        </div>
-    `;
+        `;
+    }
 }
 
 function generateClientsContent() {
@@ -383,7 +396,7 @@ async function generatePageContent(page) {
         case 'production':
             return await generateProductionContent();
         case 'catalog':
-            return generateCatalogContent();
+            return await generateCatalogContent();
         case 'clients':
             return generateClientsContent();
         case 'sales':
