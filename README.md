@@ -11,14 +11,14 @@ Rexie Maris is a specialized bag manufacturing company that produces high-qualit
 ## Features & Modules Checklist
 
 ### 📊 Core Dashboard Features
-✅ Real-time production metrics display
-✅ Key performance indicators (KPIs) overview
-✅ Production efficiency meters
-✅ Monthly revenue tracking
-✅ Active orders counter
-✅ On-time delivery statistics
-✅ Critical alerts and notifications system
-✅ Quick action buttons for common tasks
+-✅ Real-time production metrics display
+-✅ Key performance indicators (KPIs) overview
+-✅ Production efficiency meters
+-✅ Monthly revenue tracking
+-✅ Active orders counter
+-✅ On-time delivery statistics
+-✅ Critical alerts and notifications system
+-✅ Quick action buttons for common tasks
 
 ### 📦 Inventory Management Module
 ✅ Raw materials tracking (Leather, Fabric, Hardware, Packaging)
